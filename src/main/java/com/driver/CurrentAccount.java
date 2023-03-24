@@ -29,7 +29,30 @@ public class CurrentAccount extends BankAccount{
         if(!flag) return;
 
         //function for rearrange
+        int max = 0;
+        int idx = 0;
+        int[] freq = new int[26];
+        for(int i=0; i<tradeLicenseId.length(); i++) {
+            freq[tradeLicenseId.charAt(i)-'A']++;
+            if(freq[tradeLicenseId.charAt(i)-'A'] > max) idx = i;
+            max = Math.max(max, freq[tradeLicenseId.charAt(i)-'A']);
+        }
+        String ans = "";
+        char[] arr = new char[tradeLicenseId.length()];
+        int index = 0;
+        if((tradeLicenseId.length()%2==0 && max <= tradeLicenseId.length()/2) || (tradeLicenseId.length()%2!=0 && max <= tradeLicenseId.length()/2 + 1)) {
+            for(int i=0; i<26; i++) {
 
+                while(freq[i] > 0) {
+                    if(index >= tradeLicenseId.length()) index = 1;
+                    arr[index] = (char)(65+i);
+                    freq[i]--;
+                    index += 2;
+                }
+            }
+            tradeLicenseId = arr.toString();
+            return;
+        }
         //not possible
         throw new Exception("Valid License can not be generated");
     }
