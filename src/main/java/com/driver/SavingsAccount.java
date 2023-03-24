@@ -31,6 +31,14 @@ public class SavingsAccount extends BankAccount{
         return amount;
     }
 
+    public double getRate() {
+        return rate;
+    }
+
+    public double getMaxWithdrawalLimit() {
+        return maxWithdrawalLimit;
+    }
+
     public double getCompoundInterest(int times, int years){
         // Return the final amount considering that bank gives compound interest on current amount given times per year
         double amount = getBalance()*Math.pow(1+rate/(100*times),years*times);
